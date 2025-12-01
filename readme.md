@@ -14,7 +14,7 @@ From this repository in GitHub, you can find the code solutions. For explanation
 
 ## Personal scoreboard
 
-- Day 1: code : explanation
+- Day 1: [code](/src/day_1.py) : [explanation](https://notes.hamatti.org/technology/advent-of-code/2025/day-1)
 
 ## How to run my code
 
