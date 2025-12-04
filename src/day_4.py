@@ -48,19 +48,19 @@ def part_2() -> int:
     long as there are accessible rolls."""
     inputs = read_input(4, list)
     grid = create_grid(inputs, predicate=is_paper_roll)
+    original_roll_count = len(grid)
 
-    was_removed = 0
     while True:
         to_remove = {}
         for pos in grid:
             if can_access(pos, grid):
-                was_removed += 1
                 to_remove[pos] = PAPER_ROLL
         if to_remove:
             grid = dict(grid.items() - to_remove.items())
         else:
             break
-    return was_removed
+    return original_roll_count - len(grid)
+
 
 if __name__ == '__main__':
     part_1_result = part_1()
