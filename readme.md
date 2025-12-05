@@ -18,6 +18,7 @@ From this repository in GitHub, you can find the code solutions. For explanation
 - Day 2: [code](/src/day_2.py) : [explanation](https://notes.hamatti.org/technology/advent-of-code/2025/day-2)
 - Day 3: [code](/src/day_3.py) : [explanation](https://notes.hamatti.org/technology/advent-of-code/2025/day-3)
 - Day 4: [code](/src/day_4.py) : [explanation](https://notes.hamatti.org/technology/advent-of-code/2025/day-4)
+- Day 5: [code](/src/day_5.py) : [explanation](https://notes.hamatti.org/technology/advent-of-code/2025/day-5)
 
 ## How to run my code
 
