@@ -37,15 +37,15 @@ def part_1() -> int:
             fresh_count += 1
     return fresh_count
 
-def try_to_combine(first: Range, second: Range) -> Range|Tuple[Range, Range]:
+def try_to_combine(first: Range, second: Range) -> Range | None:
     """Tries to combine two ranges. If ranges overlap, returns a single Range.
     
     If they don't overlap, return both Ranges."""
     if first.end >= second.start:
         end = first.end if first.end > second.end else second.end
         return Range(start=first.start, end=end)
-    else:
-        return (first, second)
+
+    return None
 
 def part_2() -> int:
     """Calculate how many ids are included in all the ranges"""
@@ -57,8 +57,7 @@ def part_2() -> int:
     index = 0
     while True:
         try:
-            combo = try_to_combine(ranges[index], ranges[index+1])
-            if isinstance(combo, Range):
+            if combo := try_to_combine(ranges[index], ranges[index+1]):
                 ranges[index] = combo
                 ranges.remove(ranges[index+1])
             else:
