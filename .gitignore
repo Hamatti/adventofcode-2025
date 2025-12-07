@@ -1,3 +1,4 @@
 notes/
 *.pyc
 inputs/*.txt
+src/template.py

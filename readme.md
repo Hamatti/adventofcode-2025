@@ -20,6 +20,7 @@ From this repository in GitHub, you can find the code solutions. For explanation
 - Day 4: [code](/src/day_4.py) : [explanation](https://notes.hamatti.org/technology/advent-of-code/2025/day-4)
 - Day 5: [code](/src/day_5.py) : [explanation](https://notes.hamatti.org/technology/advent-of-code/2025/day-5)
 - Day 6: [code](/src/day_6.py) : [explanation](https://notes.hamatti.org/technology/advent-of-code/2025/day-6)
+- Day 7: [code](/src/day_7.py) : [explanation](https://notes.hamatti.org/technology/advent-of-code/2025/day-7)
 
 ## How to run my code
 
