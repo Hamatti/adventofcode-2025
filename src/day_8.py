@@ -44,6 +44,9 @@ class JunctionBoxPair:
     one: JunctionBox
     other: JunctionBox
 
+    def connect(self):
+        self.one.connect(self.other)
+
     def __gt__(self, other: JunctionBoxPair) -> bool:
         return self.one.distance(self.other) > other.one.distance(other.other)
     
@@ -59,9 +62,8 @@ def part_1() -> int:
     MAX_CONNECTIONS = 1000
 
     all_pairs = sorted([JunctionBoxPair(a, b) for a, b in combinations(boxes, 2)])
-    to_connect = all_pairs[:MAX_CONNECTIONS]
-    for pair in to_connect:
-        pair.one.connect(pair.other)
+    for pair in all_pairs[:MAX_CONNECTIONS]:
+        pair.connect()
 
     biggest_circuits = sorted(boxes, reverse=True)
     prod = 1
@@ -83,7 +85,7 @@ def part_2() -> int:
     all_pairs = sorted([JunctionBoxPair(a, b) for a, b in combinations(boxes, 2)])
 
     for pair in all_pairs:
-        pair.one.connect(pair.other)
+        pair.connect()
         if len(pair.one) == len(boxes):
             break
 
