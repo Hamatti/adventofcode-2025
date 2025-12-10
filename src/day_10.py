@@ -1,7 +1,6 @@
 import re
 from collections import namedtuple
-from dataclasses import dataclass
-from itertools import combinations_with_replacement
+from itertools import combinations
 from typing import List
 
 from utils import read_input
@@ -10,7 +9,7 @@ LIGHTS_PATTERN = r"\[(.*)\]"
 BUTTON_PATTERN = r"\(.*\)"
 JOLTAGE_PATTERN = r"\{.*\}"
 
-Machine = namedtuple("Machine", ["lights", "lights_length", "buttons", "joltage"])
+Machine = namedtuple("Machine", ["lights", "buttons", "joltage"])
 
 
 def mapper(line: str) -> Machine:
@@ -36,27 +35,27 @@ def mapper(line: str) -> Machine:
             button_binary += "1" if str(i) in button else "0"
         buttons_binaries.append(button_binary)
 
-    return Machine(int(lights_binary, 2), len(lights_binary), buttons_binaries, joltage)
+    return Machine(int(lights_binary, 2), buttons_binaries, joltage)
 
 
 def part_1() -> int:
-    instructions = read_input(10, mapper)
+    machines = read_input(10, mapper)
     all_presses = 0
 
-    for instruction in instructions:
-        target = instruction.lights
+    for machine in machines:
+        target = machine.lights
         presses = 1
         stop = False
         while not stop:
-            possible_presses = combinations_with_replacement(
-                instruction.buttons, presses
+            possible_presses = combinations(
+                machine.buttons, presses
             )
 
             for button_presses in possible_presses:
-                machine = int("0" * instruction.lights_length, 2)
+                current_lights = 0
                 for _press in button_presses:
-                    machine ^= int(_press, 2)
-                if machine == target:
+                    current_lights ^= int(_press, 2)
+                if current_lights == target:
                     all_presses += presses
                     stop = True
                     break
