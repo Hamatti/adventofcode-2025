@@ -23,6 +23,7 @@ From this repository in GitHub, you can find the code solutions. For explanation
 - Day 7: [code](/src/day_7.py) : [explanation](https://notes.hamatti.org/technology/advent-of-code/2025/day-7)
 - Day 8: [code](/src/day_8.py) : [explanation](https://notes.hamatti.org/technology/advent-of-code/2025/day-8)
 - Day 9: [code](/src/day_9.py) : [explanation](https://notes.hamatti.org/technology/advent-of-code/2025/day-9)
+- Day 10: [code](/src/day_10.py) : [explanation](https://notes.hamatti.org/technology/advent-of-code/2025/day-10)
 
 ## How to run my code
 
@@ -32,4 +33,3 @@ From this repository in GitHub, you can find the code solutions. For explanation
 4. `cd src/`
 5. `uv run day_1.py` (replace 1 with the day you want to run)
 6. To run with the example code, add `example=True` to `read_input` call in that day's code.
-
