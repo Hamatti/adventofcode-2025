@@ -1,7 +1,17 @@
+# /// script
+# requires-python = ">=3.10"
+# dependencies = [
+#    "z3-solver",
+# ]
+# ///
+
+
 import re
 from collections import namedtuple
 from itertools import combinations
 from typing import List
+
+import z3
 
 from utils import read_input
 
@@ -9,7 +19,7 @@ LIGHTS_PATTERN = r"\[(.*)\]"
 BUTTON_PATTERN = r"\(.*\)"
 JOLTAGE_PATTERN = r"\{.*\}"
 
-Machine = namedtuple("Machine", ["lights", "buttons", "joltage"])
+Machine = namedtuple("Machine", ["lights", "buttons", "button_raw", "joltage"])
 
 
 def mapper(line: str) -> Machine:
@@ -35,7 +45,7 @@ def mapper(line: str) -> Machine:
             button_binary += "1" if str(i) in button else "0"
         buttons_binaries.append(button_binary)
 
-    return Machine(int(lights_binary, 2), buttons_binaries, joltage)
+    return Machine(int(lights_binary, 2), buttons_binaries, buttons, joltage)
 
 
 def part_1() -> int:
@@ -63,8 +73,35 @@ def part_1() -> int:
 
     return all_presses
 
+def part_2() -> int:
+    machines = read_input(10, mapper)
+    min_number_of_presses = 0
+    for machine in machines:
+        optimizer = z3.Optimize()
+        presses = [z3.Int(f"push-button-{idx}") for idx in range(len(machine.button_raw))]
+
+        for idx, _ in enumerate(machine.button_raw):
+            optimizer.add(presses[idx] >= 0)
+        for idx, _ in enumerate(machine.joltage):
+            optimizer.add(
+                sum(presses[j] for j, btn in enumerate(machine.button_raw) if str(idx) in btn)
+                == machine.joltage[idx]
+            )
+
+        optimizer.minimize(sum(presses))
+        assert optimizer.check() == z3.sat
+
+        model = optimizer.model()
+        for press in presses:
+            min_number_of_presses += model[press].as_long()
+
+    return min_number_of_presses
 
 if __name__ == "__main__":
     part_1_result = part_1()
     print(f"Part 1: {part_1_result}")
     assert part_1_result == 469
+    
+    part_2_result = part_2()
+    print(f"Part 1: {part_2_result}")
+    assert part_2_result == 19293
